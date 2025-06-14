@@ -22,4 +22,20 @@ class AuthViewModel : ViewModel() {
                 }
             }
     }
+
+    fun register(email: String, password: String, callback: (Boolean, String) -> Unit) {
+        if (email.isEmpty() || password.isEmpty()) {
+            callback(false, "Completa todos los campos")
+            return
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    callback(true, "Registro exitoso")
+                } else {
+                    callback(false, "Error: ${it.exception?.localizedMessage}")
+                }
+            }
+    }
 }
