@@ -2,7 +2,11 @@ package com.ajrr.myrickmorty
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.ajrr.myrickmorty.auth.LoginActivity
 import com.ajrr.myrickmorty.auth.LoginAlternateActivity
@@ -14,7 +18,11 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash)
 
+        val logo = findViewById<ImageView>(R.id.logoImageView)
+        val rotate = AnimationUtils.loadAnimation(this, R.anim.logo_rotate)
+        logo.startAnimation(rotate)
         Log.d("SPLASH", "Entrando a SplashActivity")
 
         // 1. Configurar Remote Config
@@ -41,8 +49,13 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             } else {
                 Log.e("SPLASH", "Remote Config fetch failed", task.exception)
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+
+                },3500)
+
             }
         }
     }
