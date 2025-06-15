@@ -66,7 +66,9 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("episode_name", episode.name)
                 intent.putExtra("episode_code", episode.episode)
                 intent.putExtra("episode_date", episode.air_date)
+                intent.putStringArrayListExtra("episode_characters", ArrayList(episode.characters))
                 startActivity(intent)
+
             }
 
         }
