@@ -14,6 +14,13 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/episodeCharacters"
+        android:text="Fecha"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
         android:id="@+id/episodeCode"
         android:text="S01E01"
         android:layout_width="wrap_content"
