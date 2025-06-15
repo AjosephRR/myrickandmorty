@@ -29,9 +29,17 @@ Aplicación Android desarrollada en Kotlin que consume la API pública de Rick &
 
 La app permite ver la lista de episodios sin conexión si previamente se ha cacheado. Sin embargo, **las imágenes de los personajes requieren conexión a Internet** para poder cargarse correctamente desde la API.
 
-## 🛠 Instalación
+##  Instalación
 
  Clona el repositorio:
    bash
    git clone https://github.com/AjosephRR/myrickandmorty/new/master.git
+
+Estructura del proyecto
+
+├── auth → Registro y login de usuario
+├── data → Modelos y repositorio
+├── ui → Activities, adapters, layouts
+├── viewmodel → Lógica de presentación
+└── utils → Funciones auxiliares
 
