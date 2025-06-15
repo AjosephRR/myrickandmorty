@@ -1,5 +1,7 @@
 package com.ajrr.myrickmorty.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,9 +10,10 @@ import com.ajrr.myrickmorty.data.model.Episode
 import com.ajrr.myrickmorty.data.repository.EpisodeRepository
 import kotlinx.coroutines.launch
 
-class EpisodeViewModel : ViewModel() {
+class EpisodeViewModel (application: Application) : AndroidViewModel(application) {
 
-    private val repository = EpisodeRepository()
+
+    private val repository = EpisodeRepository(application.applicationContext)
 
     private val _episodes = MutableLiveData<List<Episode>>()
     val episodes: LiveData<List<Episode>> get() = _episodes
@@ -18,14 +21,16 @@ class EpisodeViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
-    fun loadEpisodes() {
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
+
+
+    fun loadEpisodes(query: String? = null) {
         viewModelScope.launch {
-            try {
-                val result = repository.getEpisodes()
-                _episodes.postValue(result)
-            } catch (e: Exception) {
-                _error.postValue("Error: ${e.localizedMessage}")
-            }
+            -loading.value = true
+                val data = repository.getEpisodes(name = query)
+                _episodes.value = data
+            _loading.value = false
         }
     }
 
