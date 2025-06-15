@@ -8,19 +8,27 @@ import com.ajrr.myrickmorty.auth.LoginActivity
 import com.ajrr.myrickmorty.auth.LoginAlternateActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 
-class SplashActivity : AppCompatActivity () {
-
+class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Log.d("SPLASH", "Entrando a SplashActivity")
 
+        // 1. Configurar Remote Config
         val remoteConfig = Firebase.remoteConfig
+        remoteConfig.setConfigSettingsAsync(
+            remoteConfigSettings {
+                minimumFetchIntervalInSeconds = 0 // Forzar actualización siempre en pruebas
+            }
+        )
+
+        // 2. Obtener y activar los valores de Remote Config
         remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val useAlternate = Firebase.remoteConfig.getBoolean("use_alternate_login")
+                val useAlternate = remoteConfig.getBoolean("use_alternate_login")
                 Log.d("SPLASH", "use_alternate_login: $useAlternate")
 
                 val intent = if (useAlternate) {
@@ -28,6 +36,7 @@ class SplashActivity : AppCompatActivity () {
                 } else {
                     Intent(this, LoginActivity::class.java)
                 }
+
                 startActivity(intent)
                 finish()
             } else {
