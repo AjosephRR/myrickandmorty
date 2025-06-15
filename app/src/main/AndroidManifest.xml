@@ -17,6 +17,7 @@
         <activity android:name=".auth.LoginAlternateActivity" />
         <activity android:name=".auth.LoginActivity"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".auth.RegisterActivity"/>
 
         <activity
             android:name=".SplashActivity"

@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="24dp"
+    android:orientation="vertical"
     android:gravity="center">
 
     <EditText
@@ -17,14 +17,14 @@
         android:id="@+id/passwordEditText"
         android:hint="Contraseña"
         android:inputType="textPassword"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" />
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/registerButton"
         android:text="Registrarse"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:layout_height="wrap_content" />
 </LinearLayout>
