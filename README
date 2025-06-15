@@ -1,0 +1,36 @@
+# MyRick&Morty 📺
+
+Aplicación Android desarrollada en Kotlin que consume la API pública de Rick & Morty para mostrar una lista de episodios y los personajes involucrados.
+
+##  Características principales
+
+- Visualización de episodios: nombre, código y fecha.
+- Búsqueda por nombre de episodio.
+- Detalle con imágenes de personajes del episodio.
+- Animaciones al cargar ítems con RecyclerView.
+- Soporte para Dark Mode.
+
+## 🔌 Requisitos
+
+- Android Studio Arctic Fox o superior
+- Internet para cargar las imágenes de personajes
+
+##  Tecnologías y librerías usadas
+
+- **Kotlin**
+- **MVVM**
+- **Glide** – para carga de imágenes
+- **ViewModel + LiveData**
+- **Material Components**
+- **Data Binding**
+- **Firebase Auth** (para cerrar sesión si está activado)
+
+##  Consideraciones Offline
+
+La app permite ver la lista de episodios sin conexión si previamente se ha cacheado. Sin embargo, **las imágenes de los personajes requieren conexión a Internet** para poder cargarse correctamente desde la API.
+
+## 🛠 Instalación
+
+ Clona el repositorio:
+   bash
+   git clone https://github.com/AjosephRR/myrickandmorty/new/master
