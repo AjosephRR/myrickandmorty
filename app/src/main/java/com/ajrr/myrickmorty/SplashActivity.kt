@@ -38,7 +38,7 @@ class SplashActivity : AppCompatActivity() {
             if (task.isSuccessful) {
                 val useAlternate = remoteConfig.getBoolean("use_alternate_login")
                 Log.d("SPLASH", "use_alternate_login: $useAlternate")
-
+                Handler(Looper.getMainLooper()).postDelayed({
                 val intent = if (useAlternate) {
                     Intent(this, LoginAlternateActivity::class.java)
                 } else {
@@ -47,6 +47,7 @@ class SplashActivity : AppCompatActivity() {
 
                 startActivity(intent)
                 finish()
+                },3500)
             } else {
                 Log.e("SPLASH", "Remote Config fetch failed", task.exception)
 
