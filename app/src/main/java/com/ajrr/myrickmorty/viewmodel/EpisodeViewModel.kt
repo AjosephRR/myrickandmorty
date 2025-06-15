@@ -27,7 +27,7 @@ class EpisodeViewModel (application: Application) : AndroidViewModel(application
 
     fun loadEpisodes(query: String? = null) {
         viewModelScope.launch {
-            -loading.value = true
+            _loading.value = true
                 val data = repository.getEpisodes(name = query)
                 _episodes.value = data
             _loading.value = false
