@@ -3,10 +3,14 @@ package com.ajrr.myrickmorty
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
+
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
@@ -30,8 +34,12 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: EpisodeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val toolbar: Toolbar = findViewById(R.id.myToolbar)
+        setSupportActionBar(toolbar)
 
         binding.episodeRecyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -51,14 +59,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.logoutButton.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, SplashActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-
-            finish()
-        }
 
         viewModel.episodes.observe(this){ episodes ->
             binding.episodeRecyclerView.adapter = EpisodeAdapter(episodes){ episode ->
@@ -74,5 +74,26 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+    private fun logout() {
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this, SplashActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
 
+        finish()
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                logout()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
