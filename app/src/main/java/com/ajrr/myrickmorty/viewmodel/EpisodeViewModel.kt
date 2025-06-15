@@ -28,4 +28,16 @@ class EpisodeViewModel : ViewModel() {
             }
         }
     }
+
+    fun searchEpisodes(query: String){
+        viewModelScope.launch {
+            try {
+                val result = repository.getEpisodes(name = query)
+                _episodes.postValue(result)
+            }catch (e: Exception){
+                _error.postValue("No se encontraron episodios con es enombre")
+
+            }
+        }
+    }
 }

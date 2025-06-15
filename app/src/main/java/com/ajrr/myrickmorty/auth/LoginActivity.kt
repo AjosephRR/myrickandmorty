@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.ajrr.myrickmorty.MainActivity
 import com.ajrr.myrickmorty.R
 import com.ajrr.myrickmorty.databinding.ActivityLoginBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,6 +22,13 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+            return
+        }
+
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
