@@ -33,4 +33,5 @@ La app permite ver la lista de episodios sin conexión si previamente se ha cach
 
  Clona el repositorio:
    bash
-   git clone https://github.com/AjosephRR/myrickandmorty/new/master
+   git clone https://github.com/AjosephRR/myrickandmorty/new/master.git
+
