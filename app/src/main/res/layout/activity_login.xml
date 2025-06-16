@@ -5,7 +5,14 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center">
-
+    <TextView
+        android:text="Rick and Morty"
+        android:textSize="24sp"
+        android:textColor="#03A9F4"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/emailEditText"
         android:hint="Correo electrónico"
